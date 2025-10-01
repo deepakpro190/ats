@@ -1,4 +1,3 @@
-<img width="1693" height="960" alt="Screenshot 2025-10-01 122158" src="https://github.com/user-attachments/assets/1629beb7-c85f-4e29-b64b-9c693191ddb4" />THIS IS ATS - SCORE- ENHANCER RESUME ASSESSMENT TASK
 
 -> frontend deployed on vercel : https://ats-u3wf.vercel.app/
 -> backend deployed at render :
