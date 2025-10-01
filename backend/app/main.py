@@ -58,12 +58,23 @@ def extract_text_from_docx_bytes(file_bytes: bytes) -> str:
     except Exception:
         return ""
 
+ocr_reader = None
+
+def get_ocr_reader():
+    global ocr_reader
+    if ocr_reader is None:
+        import easyocr
+        ocr_reader = easyocr.Reader(["en"])
+    return ocr_reader
+
 def extract_text_from_image_bytes(file_bytes: bytes) -> str:
     try:
-        results = ocr_reader.readtext(io.BytesIO(file_bytes))
+        reader = get_ocr_reader()
+        results = reader.readtext(io.BytesIO(file_bytes))
         return "\n".join([r[1] for r in results]).strip()
     except Exception:
         return ""
+
 
 # ---------- Utilities: sanitizers ----------
 def extract_first_json_object(s: str) -> str:
@@ -167,7 +178,7 @@ Resume:
                 {"role": "user", "content": prompt},
             ],
             temperature=0.4,
-            max_completion_tokens=4000,
+            max_completion_tokens=2500,
         )
         raw = completion.choices[0].message.content.strip()
     except Exception as e:
@@ -388,7 +399,7 @@ async def analyze_route(
     elif ext in ("docx", "doc"):
         resume_text = extract_text_from_docx_bytes(file_bytes)
     elif ext in ("png", "jpg", "jpeg"):
-        resume_text = extract_text_from_image_bytes(file_bytes)
+        return JSONResponse({"error": "Image files are not supported. Please upload PDF or DOCX."}, status_code=400)
     else:
         return JSONResponse({"error": "Unsupported file type"}, status_code=400)
 
@@ -535,3 +546,12 @@ def summarize_for_ui(parsed: dict, original_resume_text: str, job_description: s
         "detailed_changes": detailed,
         "enhanced_text_preview": preview,
     }
+from fastapi import Request
+from fastapi.responses import JSONResponse
+
+@app.middleware("http")
+async def limit_request_body(request: Request, call_next):
+    max_bytes = 5 * 1024 * 1024  # 5MB
+    if request.headers.get("content-length") and int(request.headers["content-length"]) > max_bytes:
+        return JSONResponse({"error": "File too large (max 5MB)"}, status_code=413)
+    return await call_next(request)
