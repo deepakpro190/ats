@@ -1,6 +1,6 @@
 
 # -> frontend deployed on vercel : https://ats-u3wf.vercel.app/
-# -> backend deployed at render :
+# -> backend deployed at render : deploy backend on pc locallyas due to free tier issue cant be deployed.
 
 some working images : 
 <img width="1670" height="937" alt="Screenshot 2025-10-01 122149" src="https://github.com/user-attachments/assets/3cc1032a-62f3-4a18-a6be-f861c923e636" />
