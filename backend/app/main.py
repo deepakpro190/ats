@@ -10,7 +10,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 
 import pdfplumber
 import docx
-import easyocr
+
 import fitz  # PyMuPDF
 from groq import Groq
 import os
@@ -58,22 +58,7 @@ def extract_text_from_docx_bytes(file_bytes: bytes) -> str:
     except Exception:
         return ""
 
-ocr_reader = None
 
-def get_ocr_reader():
-    global ocr_reader
-    if ocr_reader is None:
-        import easyocr
-        ocr_reader = easyocr.Reader(["en"])
-    return ocr_reader
-
-def extract_text_from_image_bytes(file_bytes: bytes) -> str:
-    try:
-        reader = get_ocr_reader()
-        results = reader.readtext(io.BytesIO(file_bytes))
-        return "\n".join([r[1] for r in results]).strip()
-    except Exception:
-        return ""
 
 
 # ---------- Utilities: sanitizers ----------
