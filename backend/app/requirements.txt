@@ -6,3 +6,4 @@ pdfminer.six
 python-dotenv
 groq
 python-multipart
+pymupdf
