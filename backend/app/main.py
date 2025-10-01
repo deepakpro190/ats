@@ -31,7 +31,7 @@ client = Groq(api_key=GROQ_API_KEY)
 app = FastAPI(title="Intelligent Resume Enhancer")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-ocr_reader = easyocr.Reader(["en"])
+
 
 # ---------- Helpers: extraction ----------
 def extract_text_from_pdf_bytes(file_bytes: bytes) -> str:
