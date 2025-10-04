@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-pdfplumber
-python-docx
-easyocr
-pymupdf
-groq
-python-dotenv
-magnum
