@@ -29,9 +29,18 @@ if not GROQ_API_KEY:
 client = Groq(api_key=GROQ_API_KEY)
 
 app = FastAPI(title="Intelligent Resume Enhancer")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+origins = [
+    "https://ats-u3wf.vercel.app",  # your frontend
+    "http://localhost:5173"         # for local dev (Vite)
+]
 
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ---------- Helpers: extraction ----------
 def extract_text_from_pdf_bytes(file_bytes: bytes) -> str:
