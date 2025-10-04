@@ -28,7 +28,7 @@ function UploadForm({
         )
       );
 
-      const resp = await fetch("https://ats-u6dm.vercel.app/analyze", {
+      const resp = await fetch("https://ats-nine-self.vercel.app/analyze", {
         method: "POST",
         body: form,
       });
@@ -59,7 +59,7 @@ function UploadForm({
         )
       );
 
-      const resp = await fetch("https://ats-u6dm.vercel.app/enhance", {
+      const resp = await fetch("https://ats-nine-self.vercel.app/enhance", {
         method: "POST",
         body: form,
       });
