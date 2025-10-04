@@ -555,4 +555,4 @@ async def limit_request_body(request: Request, call_next):
 from mangum import Mangum
 
 # This is required so Vercel’s serverless runtime can call FastAPI
-handler = Mangum.App(app)
+handler = Mangum(app)
