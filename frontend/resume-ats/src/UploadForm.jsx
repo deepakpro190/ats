@@ -28,7 +28,7 @@ function UploadForm({
         )
       );
 
-      const resp = await fetch("https://ats-nine-self.vercel.app/analyze", {
+      const resp = await fetch("http://127.0.0.1:8000/analyze", {
         method: "POST",
         body: form,
       });
@@ -59,7 +59,7 @@ function UploadForm({
         )
       );
 
-      const resp = await fetch("https://ats-nine-self.vercel.app/enhance", {
+      const resp = await fetch("http://127.0.0.1:8000/enhance", {
         method: "POST",
         body: form,
       });
